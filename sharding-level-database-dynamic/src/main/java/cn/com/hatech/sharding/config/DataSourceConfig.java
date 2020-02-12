@@ -1,6 +1,5 @@
 package cn.com.hatech.sharding.config;
 
-import cn.com.hatech.sharding.config.orchestration.HatechOrchestrationShardingDataSource;
 import org.apache.shardingsphere.orchestration.config.OrchestrationConfiguration;
 import org.apache.shardingsphere.orchestration.reg.api.RegistryCenterConfiguration;
 import org.apache.shardingsphere.shardingjdbc.orchestration.api.OrchestrationShardingDataSourceFactory;
