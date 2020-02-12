@@ -1,0 +1,56 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: sharding-level-database
+  shardingsphere:
+    props:
+      sql:
+        show: true
+    # 定义数据源
+    datasource:
+      names: m1,m2
+      m1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/order_db_1?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true&serverTimezone=GMT
+        username: root
+        password: admin888
+      m2:
+        type: com.zaxxer.hikari.HikariDataSource
+        driverClassName: com.mysql.cj.jdbc.Driver
+        jdbcUrl: jdbc:mysql://localhost:3306/order_db_2?useSSL=true&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&autoReconnect=true&failOverReadOnly=false&allowMultiQueries=true&serverTimezone=GMT
+        username: root
+        password: admin888
+    sharding:
+      master-slave-rules:
+        ds0:
+          # 一主多从
+          master-data-source-name: m1
+          slave-data-source-names: m2
+      # 以下是分片规则配置
+      tables:
+        #指定逻辑表t_store的数据分布情况
+        t_store:
+          #配置真是的虚拟节点， m1.t_store  m2.t_store
+          actualDataNodes: ds0.t_store
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  # 以下配置均有默认值,可以不设置
+  global-config:
+    db-config:
+      #主键类 * AUTO: 数据库ID自增; INPUT: 用户输入ID; ID_WORKER: 全局唯一ID, Long类型的主键; ID_WORKER_STR: 字符串全局唯一ID; UUID: 全局唯一ID，UUID类型的主键; NONE: 该类型为未设置主键类型
+      id-type: ID_WORKER_STR
+      #字段策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
+      field-strategy: NOT_EMPTY
+      #数据库类型
+      db-type: MYSQL
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: false
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

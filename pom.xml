@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cn.com.hatech.sharding</groupId>
+    <artifactId>sharding-jdbc-demo</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <!--水平分表-->
+        <module>sharding-level-table</module>
+        <module>sharding-base-core</module>
+        <module>sharding-level-database</module>
+        <module>sharding-vertical-database</module>
+        <module>sharding-master-slave</module>
+        <module>sharding-level-database-dynamic</module>
+    </modules>
+
+    <!-- 公共版本号统一存放处，便于以后修改，全局替换版本号 -->
+    <properties>
+        <!-- 构建项目编码格式版本配置 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- java JDK版本配置 -->
+        <java.version>1.8</java.version>
+        <!-- spring-boot版本配置 -->
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <!-- spring-cloud版本配置 -->
+        <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
+        <!-- mysql数据库连接配置 -->
+        <mysql-connector-java.version>8.0.18</mysql-connector-java.version>
+        <!-- 阿里巴巴监听版本配置 -->
+        <druid-spring-boot-starter.version>1.1.21</druid-spring-boot-starter.version>
+        <!-- MP版本配置 -->
+        <mybatis-plus-boot-starter.version>3.2.0</mybatis-plus-boot-starter.version>
+        <!-- 斯瓦格api版本配置 -->
+        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
+        <!-- 斯瓦格注解包版本配置 -->
+        <swagger-annotations.verion>1.5.20</swagger-annotations.verion>
+        <!-- 斯瓦格UI版本配置 -->
+        <swagger-bootstrap-ui.version>1.9.6</swagger-bootstrap-ui.version>
+        <!-- 日志系统版本配置 -->
+        <lombok.version>1.18.4</lombok.version>
+        <!-- fastjson工具类配置 -->
+        <fastjson.version>1.2.62</fastjson.version>
+        <!-- commons工具包 -->
+        <commons-lang-version>2.6</commons-lang-version>
+        <!-- orika-core实体类转换版本配置 -->
+        <orika-core.version>1.5.4</orika-core.version>
+    </properties>
+
+    <!-- 定义依赖 -->
+    <dependencyManagement>
+
+        <dependencies>
+            <!-- 定义spring-boot版本依赖 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-parent</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 定义spring-cloud版本依赖 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- 定义优化mysql依赖 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql-connector-java.version}</version>
+            </dependency>
+
+            <!-- 定义mybatis-plus依赖 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot-starter.version}</version>
+            </dependency>
+
+            <!-- 定义阿里巴巴监听依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-spring-boot-starter.version}</version>
+            </dependency>
+
+            <!-- 定义RESTFUL API文档插件依赖 -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${springfox-swagger2.version}</version>
+            </dependency>
+
+            <!-- 定义swagger核心注解插件依赖 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-annotations.verion}</version>
+            </dependency>
+
+            <!-- 定义swagger-bootstrap-ui自定义文档插件依赖 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>swagger-bootstrap-ui</artifactId>
+                <version>${swagger-bootstrap-ui.version}</version>
+            </dependency>
+
+            <!-- 定义lombok依赖 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+            </dependency>
+
+            <!-- 定义fastjson工具类依赖 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>${commons-lang-version}</version>
+            </dependency>
+
+            <!-- 定义orika-core实体类转换依赖 -->
+            <dependency>
+                <groupId>ma.glasnost.orika</groupId>
+                <artifactId>orika-core</artifactId>
+                <version>${orika-core.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
