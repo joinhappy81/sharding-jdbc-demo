@@ -1,11 +1,11 @@
 package cn.com.hatech.sharding.server.controller;
 
-import cn.com.hatech.sharding.common.page.HPage;
 import cn.com.hatech.sharding.common.result.ResponseObject;
 import cn.com.hatech.sharding.common.result.ResponseResult;
 import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
 import cn.com.hatech.sharding.server.service.IStoreService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -66,7 +66,7 @@ public class StoreController {
     @ApiOperation(value="店铺分页查询",httpMethod="GET",notes="根据参数分页查询店铺")
     @GetMapping("/page")
     public ResponseObject page(@ApiParam @Validated StorePageDto storePageDto) {
-        HPage<StorePo> page = storeService.findPage(storePageDto);
+        Page<StorePo> page = storeService.findPage(storePageDto);
         return ResponseResult.success("店铺分页查询成功！",page.getTotal(),page.getRecords());
     }
 

@@ -1,5 +1,7 @@
 package cn.com.hatech.sharding.common.page;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import java.util.Map;
 
 /**
@@ -30,7 +32,7 @@ public class Pagination{
      * @Date: 2019/12/18 13:14
      * @return: com.baomidou.mybatisplus.extension.plugins.pagination.Page
      */
-    public static HPage page(Map<String, Object> map){
+    public static Page page(Map<String, Object> map){
 
         if(map.containsKey("page") && map.containsKey("limit")){
             Integer p = Integer.parseInt(map.get("page").toString());
@@ -38,7 +40,7 @@ public class Pagination{
             Pagination.page = p;
             Pagination.limit = s;
         }
-        return new HPage(Pagination.page, Pagination.limit);
+        return new Page(Pagination.page, Pagination.limit);
     }
 
     /**
@@ -48,10 +50,10 @@ public class Pagination{
      * @Date: 2019/12/18 13:14
      * @return: com.baomidou.mybatisplus.extension.plugins.pagination.Page
      */
-    public static <T extends PaginationQuery> HPage page(T page){
+    public static <T extends PaginationQuery> Page page(T page){
         Pagination.page =  page.getPage();
         Pagination.limit = page.getLimit();
-        return new HPage(Pagination.page, Pagination.limit);
+        return new Page(Pagination.page, Pagination.limit);
     }
 
     /**
@@ -62,12 +64,12 @@ public class Pagination{
      * @Date: 2019/12/18 13:14
      * @return: com.baomidou.mybatisplus.extension.plugins.pagination.Page
      */
-    public static HPage page(Integer page, Integer limit){
+    public static Page page(Integer page, Integer limit){
         if(limit > 0){
             Pagination.page = page;
             Pagination.limit = limit;
         }
-        return new HPage(Pagination.page, Pagination.limit);
+        return new Page(Pagination.page, Pagination.limit);
     }
 
 }

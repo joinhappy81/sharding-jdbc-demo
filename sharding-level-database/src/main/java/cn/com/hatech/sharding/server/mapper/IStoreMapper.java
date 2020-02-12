@@ -1,9 +1,9 @@
 package cn.com.hatech.sharding.server.mapper;
 
 import cn.com.hatech.sharding.common.base.IBaseMapper;
-import cn.com.hatech.sharding.common.page.HPage;
 import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,5 +25,5 @@ import java.util.List;
 @Mapper
 public interface IStoreMapper extends IBaseMapper<StorePo> {
 
-    List<StorePo> findPage(HPage<StorePo> page, @Param("params") StorePageDto storePageDto);
+    List<StorePo> findPage(Page<StorePo> page, @Param("params") StorePageDto storePageDto);
 }

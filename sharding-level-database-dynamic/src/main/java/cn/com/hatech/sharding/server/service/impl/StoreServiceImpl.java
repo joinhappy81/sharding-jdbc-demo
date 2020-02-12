@@ -1,7 +1,6 @@
 package cn.com.hatech.sharding.server.service.impl;
 
 import cn.com.hatech.sharding.common.base.AbstractService;
-import cn.com.hatech.sharding.common.page.HPage;
 import cn.com.hatech.sharding.common.page.Pagination;
 import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
@@ -42,8 +41,8 @@ public class StoreServiceImpl extends AbstractService<StorePo> implements IStore
     }
 
     @Override
-    public HPage<StorePo> findPage(StorePageDto storePageDto) {
-        HPage<StorePo> page = Pagination.page(storePageDto.getPage(),storePageDto.getLimit());
+    public Page<StorePo> findPage(StorePageDto storePageDto) {
+        Page<StorePo> page = Pagination.page(storePageDto.getPage(),storePageDto.getLimit());
         List<StorePo> list = storeMapper.findPage(page,storePageDto);
         page.setRecords(list);
         return page;
