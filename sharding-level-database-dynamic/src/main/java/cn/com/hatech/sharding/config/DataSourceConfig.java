@@ -35,8 +35,7 @@ public class DataSourceConfig {
         regConfig.setNamespace("orchestration-sharding-namespace");
         OrchestrationConfiguration orchConfig = new OrchestrationConfiguration("orchestration-sharding-data-source", regConfig,false);
         // 获取数据源对象
-        //return OrchestrationShardingDataSourceFactory.createDataSource(orchConfig);
-        return new HatechOrchestrationShardingDataSource(orchConfig);
+        return OrchestrationShardingDataSourceFactory.createDataSource(orchConfig);
     }
 
     @Primary
