@@ -1,6 +1,8 @@
 package cn.com.hatech.sharding.server.service;
 
 import cn.com.hatech.sharding.common.base.IBaseService;
+import cn.com.hatech.sharding.common.page.HPage;
+import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
 
 import java.util.List;
@@ -21,4 +23,6 @@ import java.util.List;
 public interface IStoreService extends IBaseService<StorePo> {
 
     List<StorePo> findAll(Long areaId);
+
+    HPage<StorePo> findPage(StorePageDto storePageDto);
 }

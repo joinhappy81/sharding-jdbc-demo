@@ -1,10 +1,14 @@
 package cn.com.hatech.sharding.server.service.impl;
 
 import cn.com.hatech.sharding.common.base.AbstractService;
+import cn.com.hatech.sharding.common.page.HPage;
+import cn.com.hatech.sharding.common.page.Pagination;
+import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
 import cn.com.hatech.sharding.server.mapper.IStoreMapper;
 import cn.com.hatech.sharding.server.service.IStoreService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,5 +39,13 @@ public class StoreServiceImpl extends AbstractService<StorePo> implements IStore
             queryWrapper.eq("area_id",areaId);
         }
         return storeMapper.selectList(queryWrapper);
+    }
+
+    @Override
+    public HPage<StorePo> findPage(StorePageDto storePageDto) {
+        HPage<StorePo> page = Pagination.page(storePageDto.getPage(),storePageDto.getLimit());
+        List<StorePo> list = storeMapper.findPage(page,storePageDto);
+        page.setRecords(list);
+        return page;
     }
 }

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.com.hatech.sharding.server.mapper.IStoreMapper">
+
+    <!-- 根据账号查询用户信息 -->
+    <select id="findPage" resultType="cn.com.hatech.sharding.server.entity.StorePo">
+        select a.* from t_store a
+		<where>
+            <if test="params.name != null and params.name != ''">
+                and a.name like concat('%',#{params.name},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

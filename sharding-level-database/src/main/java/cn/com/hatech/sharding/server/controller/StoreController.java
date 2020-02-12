@@ -1,12 +1,17 @@
 package cn.com.hatech.sharding.server.controller;
 
+import cn.com.hatech.sharding.common.page.HPage;
 import cn.com.hatech.sharding.common.result.ResponseObject;
 import cn.com.hatech.sharding.common.result.ResponseResult;
+import cn.com.hatech.sharding.server.entity.StorePageDto;
 import cn.com.hatech.sharding.server.entity.StorePo;
 import cn.com.hatech.sharding.server.service.IStoreService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -56,6 +61,13 @@ public class StoreController {
     public ResponseObject list (Long areaId) {
         List<StorePo> list = storeService.findAll(areaId);
         return ResponseResult.success("查询成功",list);
+    }
+
+    @ApiOperation(value="店铺分页查询",httpMethod="GET",notes="根据参数分页查询店铺")
+    @GetMapping("/page")
+    public ResponseObject page(@ApiParam @Validated StorePageDto storePageDto) {
+        HPage<StorePo> page = storeService.findPage(storePageDto);
+        return ResponseResult.success("店铺分页查询成功！",page.getTotal(),page.getRecords());
     }
 
 }
